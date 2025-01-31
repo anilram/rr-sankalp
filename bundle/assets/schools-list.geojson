@@ -1,0 +1,10 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+{ "type": "Feature", "properties": { "UDISE": "22110403505" }, "geometry": { "type": "Point", "coordinates": [ 81.594924921939722, 21.2489510693539 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110428501" }, "geometry": { "type": "Point", "coordinates": [ 81.619236911578113, 21.240800132893483 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110429807" }, "geometry": { "type": "Point", "coordinates": [ 81.614495070787456, 21.233643926382303 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004" }, "geometry": { "type": "Point", "coordinates": [ 81.625061648101635, 21.251794941684441 ] } }
+
+]
+}

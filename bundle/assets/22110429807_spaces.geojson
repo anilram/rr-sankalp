@@ -1,0 +1,16 @@
+{
+"type": "FeatureCollection",
+"floors":[
+    "Block1 Ground","Block2 Ground"
+],
+"features": [
+{ "type": "Feature", "properties": { "LENGTH": "", "ENCLOSED_AREA": "", "SINUOSITY": "", "UDISE": "22110429807", "Space": "Outside", "Floor": "Block2 Ground", "Block": "2", "layer":"Block2" }, "geometry": { "type": "Point", "coordinates": [ 81.614507023047409, 21.233712378891688 ] } },
+{ "type": "Feature", "properties": { "LENGTH": "", "ENCLOSED_AREA": "", "SINUOSITY": "", "UDISE": "22110429807", "Space": "Class Room", "Floor": "Block2 Ground", "Block": "2", "layer":"Block2" }, "geometry": { "type": "Point", "coordinates": [ 81.614466681628059, 21.233766631145283 ] } },
+{ "type": "Feature", "properties": { "LENGTH": "", "ENCLOSED_AREA": "", "SINUOSITY": "", "UDISE": "22110429807", "Space": "Store Room", "Floor": "Block2 Ground", "Block": "2", "layer":"Block2" }, "geometry": { "type": "Point", "coordinates": [ 81.614445351682207, 21.233747155977326 ] } },
+{ "type": "Feature", "properties": { "LENGTH": "", "ENCLOSED_AREA": "", "SINUOSITY": "", "UDISE": "22110429807", "Space": "HM", "Floor": "Block1 Ground", "Block": "1", "layer":"Block1" }, "geometry": { "type": "Point", "coordinates": [ 81.614547828161221, 21.233584862911023 ] } },
+{ "type": "Feature", "properties": { "LENGTH": "", "ENCLOSED_AREA": "", "SINUOSITY": "", "UDISE": "22110429807", "Space": "Class 5A", "Floor": "Block1 Ground", "Block": "1", "layer":"Block1" }, "geometry": { "type": "Point", "coordinates": [ 81.614514442159006, 21.233553795381187 ] } },
+{ "type": "Feature", "properties": { "LENGTH": "", "ENCLOSED_AREA": "", "SINUOSITY": "", "UDISE": "22110429807", "Space": "Class 1A", "Floor": "Block1 Ground", "Block": "1", "layer":"Block1" }, "geometry": { "type": "Point", "coordinates": [ 81.614466681628059, 21.233592282022627 ] } },
+{ "type": "Feature", "properties": { "LENGTH": "", "ENCLOSED_AREA": "", "SINUOSITY": "", "UDISE": "22110429807", "Space": "Toilets", "Floor": "Block1 Ground", "Block": "1", "layer":"Block1" }, "geometry": { "type": "Point", "coordinates": [ 81.614417306753396, 21.233544178014299 ] } },
+{ "type": "Feature", "properties": { "LENGTH": "", "ENCLOSED_AREA": "", "SINUOSITY": "", "UDISE": "22110429807", "Space": "Office \/ Admin", "Floor": "Block1 Ground", "Block": "1", "layer":"Block1" }, "geometry": { "type": "Point", "coordinates": [ 81.614449284498335, 21.23352312285035 ] } }
+]
+}

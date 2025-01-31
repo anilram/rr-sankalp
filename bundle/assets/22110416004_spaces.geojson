@@ -1,0 +1,24 @@
+{
+"type": "FeatureCollection",
+"name": "E:\\Projects\\Sankalp\\Mapview\\sankalp\\bundle\\assets\\22110416004_spaces.geojson",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"floors":[
+    "Block1 Floor1", "Block1 Floor2", "Block1 Floor3"
+],
+"features": [
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "Class 3B", "Floor": "Block1 Floor1", "Block": "1", "layer": "Block1 Floor1" }, "geometry": { "type": "Point", "coordinates": [ 81.624993584690628, 21.251834232104951 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "HM Room", "Floor": "Block1 Floor1", "Block": "1", "layer": "Block1 Floor1" }, "geometry": { "type": "Point", "coordinates": [ 81.625149144734664, 21.251747915251244 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "Kitchen", "Floor": "Block1 Floor1", "Block": "1", "layer": "Block1 Floor1" }, "geometry": { "type": "Point", "coordinates": [ 81.625103298786726, 21.251745701998587 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "Toilets", "Floor": "Block1 Floor1", "Block": "1", "layer": "Block1 Floor1" }, "geometry": { "type": "Point", "coordinates": [ 81.62498884200636, 21.251736848987949 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "Class 1A", "Floor": "Block1 Floor1", "Block": "1", "layer": "Block1 Floor1" }, "geometry": { "type": "Point", "coordinates": [ 81.624992319974822, 21.251783643472741 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "Class 4A", "Floor": "Block1 Floor1", "Block": "1", "layer": "Block1 Floor1" }, "geometry": { "type": "Point", "coordinates": [ 81.62506567349152, 21.251842136578734 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "Class 3A", "Floor": "Block1 Floor1", "Block": "1", "layer": "Block1 Floor1" }, "geometry": { "type": "Point", "coordinates": [ 81.625118159197442, 21.251833599747048 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "Class Room", "Floor": "Block1 Floor2", "Block": "1", "layer": "Block1 Floor2" }, "geometry": { "type": "Point", "coordinates": [ 81.625128550540282, 21.251746144370017 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "Girls Toilets", "Floor": "Block1 Floor2", "Block": "1", "layer": "Block1 Floor2" }, "geometry": { "type": "Point", "coordinates": [ 81.624991483713131, 21.251737366350401 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "Class 5B", "Floor": "Block1 Floor2", "Block": "1", "layer": "Block1 Floor2" }, "geometry": { "type": "Point", "coordinates": [ 81.625118159197442, 21.251833599747048 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "Store Room", "Floor": "Block1 Floor2", "Block": "1", "layer": "Block1 Floor2" }, "geometry": { "type": "Point", "coordinates": [ 81.625047501723444, 21.251839543186346 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "Library", "Floor": "Block1 Floor2", "Block": "1", "layer": "Block1 Floor2" }, "geometry": { "type": "Point", "coordinates": [ 81.624992405514362, 21.251841123815293 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "Class 2A", "Floor": "Block1 Floor2", "Block": "1", "layer": "Block1 Floor2" }, "geometry": { "type": "Point", "coordinates": [ 81.624993534535051, 21.251788737255847 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110416004", "Space": "Seminar Hall", "Floor": "Block1 Floor3", "Block": "1", "layer": "Block1 Floor3" }, "geometry": { "type": "Point", "coordinates": [ 81.625009340824533, 21.25182712395889 ] } }
+]
+}

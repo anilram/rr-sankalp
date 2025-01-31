@@ -1,0 +1,16 @@
+{
+"type": "FeatureCollection",
+"name": "E:\\Projects\\Sankalp\\Mapview\\sankalp\\bundle\\assets\\22110403505_spaces.geojson",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"floors":[
+    "Block1 Floor1","Block2 Floor1"
+],
+"features": [
+{ "type": "Feature", "properties": { "UDISE": "22110403505", "Space": "Class 3A", "Floor": "Block2 Floor1", "Block": "2", "layer": "Block2 Floor1" }, "geometry": { "type": "Point", "coordinates": [ 81.594805009832982, 21.249045856434183 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110403505", "Space": "Class 1A", "Floor": "Block2 Floor1", "Block": "2", "layer": "Block2 Floor1" }, "geometry": { "type": "Point", "coordinates": [ 81.594768520185752, 21.248989463343001 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110403505", "Space": "Class 5A", "Floor": "Block2 Floor1", "Block": "2", "layer": "Block2 Floor1" }, "geometry": { "type": "Point", "coordinates": [ 81.594717434679623, 21.24891051301535 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110403505", "Space": "Staff room", "Floor": "Block2 Floor1", "Block": "2", "layer": "Block2 Floor1" }, "geometry": { "type": "Point", "coordinates": [ 81.594923767048527, 21.248791092351674 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110403505", "Space": "Girls Toilets", "Floor": "Block1 Floor1", "Block": "2", "layer": "Block1 Floor1" }, "geometry": { "type": "Point", "coordinates": [ 81.594981487035966, 21.248747968223125 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110403505", "Space": "Boys Toilets", "Floor": "Block1 Floor1", "Block": "2", "layer": "Block1 Floor1" }, "geometry": { "type": "Point", "coordinates": [ 81.595004707720562, 21.248783794422227 ] } }
+]
+}
