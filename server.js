@@ -23,12 +23,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/map.html', (req, res) => {
-  const title = req.query.title || '';  // Get the title from query params
-  console.log('Title:', title); // For debugging purposes
-
-  // Dynamically determine the JavaScript file to serve based on the title
-  const scriptFile = title ? `map_${title}.js` : 'map.js';  // Map title-based JS or default JS
-
+  const UDISE = req.query.UDISE || '';  // Get the UDISE from query params
+  // Dynamically determine the JavaScript file to serve based on the UDISE
+  const scriptFile = UDISE ? `map_${UDISE}.js` : 'map.js';  // Map UDISE-based JS or default JS
+  console.log('scriptfile:', scriptFile);
   // Render the map.html template with the dynamically determined script
    res.sendFile(path.join(__dirname, 'map.html'), { scriptFile });
 });

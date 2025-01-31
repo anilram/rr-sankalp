@@ -32,18 +32,7 @@
         <div class="sidebar">
             <div class="section-title">Sankalp</div>
             <div class="layer-sidebar">
-                <div id="layer-container">
-                    <div class="subsection-title">Layers</div>
-                    <!-- Map controls with checkboxes -->
-                    <div class="layer-checkbox-container">
-                        <input type="checkbox" id="layer1" name="layer1" checked>
-                        <label for="layer1">Layer 1</label>
-                    </div>
-                    <div class="layer-checkbox-container">
-                        <input type="checkbox" id="layer2" name="layer2">
-                        <label for="layer2">Layer 2</label>
-                    </div>
-                </div>
+                <div id="layer-container"></div>
                 <div id="walkthrough-container"></div>
             </div>
         </div>
@@ -74,7 +63,7 @@
     <script>
         // Get the script file name from the query parameter
         const urlParams = new URLSearchParams(window.location.search);
-        const scriptFile = urlParams.get('title') ? `map_${urlParams.get('title')}.js` : 'map_default.js';  // Default fallback
+        const scriptFile = urlParams.get('UDISE') ? `map_${urlParams.get('UDISE')}.js` : 'map.js';  // Default fallback
         
         console.log(scriptFile);  // This will log the script file name
         
@@ -342,8 +331,16 @@
     </script>
 
     <script>
-        // Your Mapbox access token
+        let geojson = null;
+
+// Fetch the GeoJSON data from the external file (replace with the correct path)
+fetch('/bundle/assets/schools-list.geojson')
+    .then(response => response.json())  // Parse the JSON data
+    .then(geojsondata => {
+        // Store the fetched GeoJSON data in the geojson variable
+        geojson = geojsondata;
         mapboxgl.accessToken = 'pk.eyJ1IjoicmF5YXBhdGk0OSIsImEiOiJjbGVvMWp6OGIwajFpM3luNTBqZHhweXZzIn0.1r2DoIQ1Gf2K3e5WBgDNjA';
+
         const mapContainer2 = document.getElementById('map-container-2');
 
         // Initialize the map
@@ -351,42 +348,14 @@
             container: mapContainer2, // ID of the map container
             style: 'mapbox://styles/mapbox/streets-v11', // Map style
             center: [78.4867, 18.0750], // Initial coordinates [lng, lat]
-            zoom: 4, // Initial zoom level
+            zoom: 6, // Initial zoom level
+            attributionControl:false
         });
-
-        // Example GeoJSON data with 11 features
-        const geojson = {
-            "type": "FeatureCollection",
-            "features": [
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [81.6092, 21.2235] // Sankalp School, Raipur
-                    },
-                    "properties": {
-                        "title": "Sankalp",
-                        "url": "https://en.wikipedia.org/wiki/Hyderabad"
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [82.6092, 21.2235] // Another School
-                    },
-                    "properties": {
-                        "title": "School",
-                        "url": "https://en.wikipedia.org/wiki/Hyderabad"
-                    }
-                }
-            ]
-        };
 
         // Array to store the bounds for all markers
         const bounds = new mapboxgl.LngLatBounds();
 
-        // Add markers with hover popups and update bounds
+        // Add markers with hover popups
         geojson.features.forEach((feature) => {
             const { geometry, properties } = feature;
             const [lng, lat] = geometry.coordinates;
@@ -398,18 +367,23 @@
 
             // Create the popup without the close button
             const popup = new mapboxgl.Popup({ offset: 25, closeButton: false })
-                .setHTML(`<p>${properties.title}</p>`);
+                .setHTML(`<p>UDISE:${properties.UDISE}</p>`);
 
             popup.setLngLat([lng, lat]).addTo(map2);
 
-            // Update the bounds with the marker's coordinates
+            const markerElement = marker.getElement();
+            markerElement.addEventListener('click', () => {
+                window.location.href = `/map.html?UDISE=${encodeURIComponent(properties.UDISE)}`;
+            });
+
+            // Extend the bounds to include the marker's coordinates
             bounds.extend([lng, lat]);
         });
 
         // Fit the map to the bounds of all markers
         map2.fitBounds(bounds, {
             padding: { top: 50, bottom: 50, left: 50, right: 50 }, // Padding around the markers
-            maxZoom: 6, // Limit the maximum zoom level
+            maxZoom: 12, // Limit the maximum zoom level
             duration: 1000 // Smooth animation for zooming and centering
         });
 
@@ -423,6 +397,7 @@
         // Initialize DOM elements
         const mapToggleBtn = document.getElementById('map-toggle');
 
+
         // Toggle map visibility
         mapToggleBtn.addEventListener('click', () => {
             mapContainer2.classList.toggle('hidden');
@@ -431,6 +406,11 @@
 
         // Call closeMap() initially
         closeMap();
+    })
+    .catch(error => {
+        console.error('Error loading the GeoJSON file:', error);
+    });
+
     </script>
 </body>
 </html>
