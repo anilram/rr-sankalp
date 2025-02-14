@@ -96,17 +96,6 @@
             contentContainer.classList.toggle('shifted');
         });
 
-        // Close sidebar when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!sidebar.contains(e.target) && 
-                !sidebarToggle.contains(e.target) && 
-                sidebar.classList.contains('active')) {
-                sidebar.classList.remove('active');
-                sidebarToggle.classList.remove('active');
-                contentContainer.classList.remove('shifted');
-            }
-        });
-
         // Prevent sidebar close when clicking inside
         sidebar.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -342,6 +331,7 @@ fetch('/bundle/assets/schools-list.geojson')
         mapboxgl.accessToken = 'pk.eyJ1IjoicmF5YXBhdGk0OSIsImEiOiJjbGVvMWp6OGIwajFpM3luNTBqZHhweXZzIn0.1r2DoIQ1Gf2K3e5WBgDNjA';
 
         const mapContainer2 = document.getElementById('map-container-2');
+        const sectionTitle = document.querySelector('.section-title'); // Select the section title
 
         // Initialize the map
         const map2 = new mapboxgl.Map({
@@ -349,7 +339,7 @@ fetch('/bundle/assets/schools-list.geojson')
             style: 'mapbox://styles/mapbox/streets-v11', // Map style
             center: [78.4867, 18.0750], // Initial coordinates [lng, lat]
             zoom: 6, // Initial zoom level
-            attributionControl:false
+            attributionControl: false
         });
 
         // Array to store the bounds for all markers
@@ -367,7 +357,7 @@ fetch('/bundle/assets/schools-list.geojson')
 
             // Create the popup without the close button
             const popup = new mapboxgl.Popup({ offset: 25, closeButton: false })
-                .setHTML(`<p>UDISE:${properties.UDISE}</p>`);
+                .setHTML(`<p>UDISE: ${properties.UDISE}</p>`);
 
             popup.setLngLat([lng, lat]).addTo(map2);
 
@@ -396,7 +386,6 @@ fetch('/bundle/assets/schools-list.geojson')
 
         // Initialize DOM elements
         const mapToggleBtn = document.getElementById('map-toggle');
-
 
         // Toggle map visibility
         mapToggleBtn.addEventListener('click', () => {

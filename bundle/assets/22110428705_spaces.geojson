@@ -1,0 +1,93 @@
+{
+    "type": "FeatureCollection",
+    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "floors": [
+      "Block 1 Floor 1","Block 4 Floor 1"
+    ],
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110428705",
+          "Space": "Store Room",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1&2&3",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.656633960150856, 21.264170686919723]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110428705",
+          "Space": "Class 1",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.65664381465902, 21.264127162842001]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110428705",
+          "Space": "Class 4",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.656696372035896, 21.264110738661728]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110428705",
+          "Space": "Toilets",
+          "Floor": "Block 4 Floor 1",
+          "Block": "Block 4",
+          "layer": "Block 4 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.65675632029388, 21.264201892862243]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110428705",
+          "Space": "Waiting Hall",
+          "Floor": "Block 4 Floor 1",
+          "Block": "Block 4",
+          "layer": "Block 4 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.656806414043714, 21.264209283743366]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110428705",
+          "Space": "Anganvadi",
+          "Floor": "Block 4 Floor 1",
+          "Block": "Block 4",
+          "layer": "Block 4 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.656854044166508, 21.264197786817174]
+        }
+      }
+    ]
+  }

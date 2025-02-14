@@ -1,0 +1,247 @@
+{
+    "type": "FeatureCollection",
+    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "floors": [
+      "Block2 Floor1", "Block4 Floor1", "Block5 Floor1"
+    ],
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Toilets 1",
+          "Floor": "Block2 Floor1",
+          "Block": "2",
+          "layer": "Block2 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604219616859439, 21.228636100893123]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Toilets 2",
+          "Floor": "Block2 Floor1",
+          "Block": "2",
+          "layer": "Block2 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604301778625981, 21.22861865873039]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Toilets 3",
+          "Floor": "Block2 Floor1",
+          "Block": "2",
+          "layer": "Block2 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604018113979464, 21.228603052584791]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Store Room",
+          "Floor": "Block2 Floor1",
+          "Block": "2",
+          "layer": "Block2 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604174175435475, 21.228613609683286]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Corridor",
+          "Floor": "Block2 Floor1",
+          "Block": "2",
+          "layer": "Block2 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604110373840228, 21.228592954490576]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Class Room",
+          "Floor": "Block2 Floor1",
+          "Block": "2",
+          "layer": "Block2 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604179224482579, 21.228580561374951]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Class 1",
+          "Floor": "Block2 Floor1",
+          "Block": "2",
+          "layer": "Block2 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604114963883049, 21.228557611160834]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "HM Room",
+          "Floor": "Block2 Floor1",
+          "Block": "2",
+          "layer": "Block2 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604120471934436, 21.228523644843936]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Staff Room",
+          "Floor": "Block2 Floor1",
+          "Block": "2",
+          "layer": "Block2 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604175552448325, 21.228542923023795]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Store Room 2",
+          "Floor": "Block4 Floor1",
+          "Block": "4",
+          "layer": "Block4 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604297647587444, 21.228456171214422]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Store Room 3",
+          "Floor": "Block4 Floor1",
+          "Block": "4",
+          "layer": "Block4 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604265058283389, 21.228441024073103]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Class 5",
+          "Floor": "Block5 Floor1",
+          "Block": "5",
+          "layer": "Block5 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604248075124957, 21.228377681482133]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Class 4",
+          "Floor": "Block5 Floor1",
+          "Block": "5",
+          "layer": "Block5 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604263222266269, 21.228340502135257]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Class 3",
+          "Floor": "Block5 Floor1",
+          "Block": "5",
+          "layer": "Block5 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604276992394745, 21.228298732745561]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Storage Room",
+          "Floor": "Block5 Floor1",
+          "Block": "5",
+          "layer": "Block5 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604242108069286, 21.228280372574265]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Library",
+          "Floor": "Block5 Floor1",
+          "Block": "5",
+          "layer": "Block5 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604207223743813, 21.228373091439309]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110400102",
+          "Space": "Store Room 1",
+          "Floor": "Block4 Floor1",
+          "Block": "4",
+          "layer": "Block4 Floor1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.604277451399014, 21.228510333719747]
+        }
+      }
+    ]
+  }

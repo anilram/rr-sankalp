@@ -1,10 +1,17 @@
 {
     "type": "FeatureCollection",
     "features": [
-{ "type": "Feature", "properties": { "UDISE": "22110403505" }, "geometry": { "type": "Point", "coordinates": [ 81.594924921939722, 21.2489510693539 ] } },
-{ "type": "Feature", "properties": { "UDISE": "22110428501" }, "geometry": { "type": "Point", "coordinates": [ 81.619236911578113, 21.240800132893483 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110403505"  }, "geometry": { "type": "Point", "coordinates": [ 81.594924921939722, 21.2489510693539 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110428501"}, "geometry": { "type": "Point", "coordinates": [ 81.619236911578113, 21.240800132893483 ] } },
 { "type": "Feature", "properties": { "UDISE": "22110429807" }, "geometry": { "type": "Point", "coordinates": [ 81.614495070787456, 21.233643926382303 ] } },
-{ "type": "Feature", "properties": { "UDISE": "22110416004" }, "geometry": { "type": "Point", "coordinates": [ 81.625061648101635, 21.251794941684441 ] } }
+{ "type": "Feature", "properties": { "UDISE": "22110416004" }, "geometry": { "type": "Point", "coordinates": [ 81.625061648101635, 21.251794941684441 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110400102" }, "geometry": { "type": "Point", "coordinates": [81.6042613296,21.2284878688 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110406122" }, "geometry": { "type": "Point", "coordinates": [81.6383598374,21.2908202489] } },
+{ "type": "Feature", "properties": { "UDISE": "22110402107" }, "geometry": { "type": "Point", "coordinates": [81.5971212021,21.2283380638 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110400113" }, "geometry": { "type": "Point", "coordinates": [81.6043863022,21.2281345674 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110419814" }, "geometry": { "type": "Point", "coordinates": [81.6890256711,21.2518054063 ] } },
+{ "type": "Feature", "properties": { "UDISE": "22110428705" }, "geometry": { "type": "Point", "coordinates": [81.6566905262,21.2641145552] } },
+{ "type": "Feature", "properties": { "UDISE": "22110403707" }, "geometry": { "type": "Point", "coordinates": [81.6766905262,21.2741145552] } }
 
 ]
 }

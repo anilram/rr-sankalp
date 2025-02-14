@@ -28,22 +28,19 @@ function initializeMap() {
   });
 
   map.on('load', () => {
-    // Add raster tileset layer
-    map.addSource('orthoTileset', {
-      type: 'raster',
-      url: 'mapbox://rayapati49.2tjn2e4d',
-    });
-    map.addLayer({
-      id: 'orthoTilesetLayer',
-      source: 'orthoTileset',
-      type: 'raster',
-      layout: { visibility: 'visible' },
+    map.addSource('local-tiles', {
+        type: 'raster',
+        tiles: ['http://localhost:8080/data/22110416004/{z}/{x}/{y}.png'],
+        tileSize: 256
     });
 
+    map.addLayer({
+        id: 'local-layer',
+        type: 'raster',
+        source: 'local-tiles'
+    });
     // Load and add GeoJSON layers
     loadGeoJSONLayers();
-
-    
   });
 }
 
@@ -53,7 +50,7 @@ function loadGeoJSONLayers() {
     const data = response.data;
     let polygonColorIndex = 0;
     let lineColorIndex = 0;
-
+    document.querySelector('.section-title').textContent = data.schoolname_code;
     data.features.map((feature, index) => {
       const layerName = feature.properties.layer || `Layer ${index + 1}`;
       let color;
@@ -240,115 +237,184 @@ function getSubButtonsForFloor(floor) {
       { name: 'Store Room', url: 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=13&sr=-3.14' },
       { name: 'Class 2A', url: 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=24&sr=-.2,-.08' },
       { name: 'Class 5B', url: 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=3&sr=-3.14' },
-      { name: 'Toilets2', url: 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=24&sr=-1.68,-1.32' },
-      { name: 'Seminar Hall', url: 'https://my.matterport.com/show/?m=KKsNGzHP2M6&cloudEdit=1&ss=6&sr=-.11,.94' }
+      { name: 'Girls Toilets', url: 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=24&sr=-1.68,-1.32' }
+      
     ],
     'Block1 Floor3': [
-      { name: 'Seminar Hall -2', url: 'https://my.matterport.com/show/?m=KKsNGzHP2M6&cloudEdit=1&ss=6&sr=-.11,.94' }
+      { name: 'Seminar Hall', url: 'https://my.matterport.com/show/?m=KKsNGzHP2M6&cloudEdit=1&ss=6&sr=-.11,.94' }
     ]
   };
   return subButtons[floor] || [];
 }
 
+
 // New function to handle 3D model viewing for specific areas
 function openModelViewerForFloor(area){ 
   console.log(`Opening model for ${area}`);
   const modelViewer = document.querySelector('.model-viewer');
-  const modelOverlay = document.querySelector('.model-overlay');
+  const modelOverlay = ensureModelOverlay();
   const modelFrame = document.getElementById('modelFrame');
   const floorPlanFrame = document.getElementById('floorPlanFrame');
+
+
 
   if (!modelViewer || !modelOverlay || !modelFrame || !floorPlanFrame) {
     console.error('Required elements are missing from the DOM.');
     return;
   }
+  
 
   const deepLink = getDeepLinkForArea(area);
   
   if (deepLink) {
-    modelFrame.src = deepLink;
-    floorPlanFrame.src = deepLink;
+    const enhancedDeepLink = `${deepLink}&application=sdk&title=0&qs=1`;
+    modelFrame.src = enhancedDeepLink;
+    floorPlanFrame.src = enhancedDeepLink;
   } else {
     console.error('No deep link available for this area.');
     return;
   }
   
+  const mapContainer = document.getElementById('map-container');
+  mapContainer.classList.add('shifted');
   modelViewer.classList.add('active');
   modelOverlay.classList.add('active');
   
   modelFrame.addEventListener('load', async () => {
     try {
-      const modelSdk = await modelFrame.contentWindow.MP_SDK.connect(modelFrame.contentWindow);
-      console.log('Connected to 3D Model SDK:', modelSdk);
-
-      const floorPlan = document.getElementById('floor-plan');
-      const marker = createFloorPlanMarker(floorPlan);
-      listenForPositionChanges(modelSdk, marker);
-
-      setTimeout(async () => {
-        await ensureFloorPlanMode(modelSdk);
-      }, 1000);
+      const sdks = await initializeMatterportSdk(deepLink);
+      if (sdks) {
+        window.modelSdk = sdks.modelSdk;
+        window.floorPlanSdk = sdks.floorPlanSdk;
+        console.log('Both SDKs connected and synchronized');
+      }
     } catch (error) {
-      console.error('Error connecting to 3D Model SDK:', error);
+      console.error('Error initializing SDKs:', error);
     }
   });
 }
 
-async function ensureFloorPlanMode(sdk) {
-  try {
-    if (!sdk) {
-      console.error("SDK is not initialized.");
-      return;
+async function initializeMatterportSdk(deepLink) {
+    const iframe = document.getElementById('modelFrame');
+    
+    return new Promise((resolve, reject) => {
+        iframe.addEventListener('load', async () => {
+            try {
+                setTimeout(async () => {
+                    try {
+                        const sdk = await iframe.contentWindow.MP_SDK.connect(
+                            iframe,
+                            'h8m1gx75u1bezk7yaw7yggzwb',
+                            ''
+                        );
+                        
+                        // Initialize floor plan SDK
+                        const floorPlanIframe = document.getElementById('floorPlanFrame');
+                        const floorPlanSdk = await floorPlanIframe.contentWindow.MP_SDK.connect(
+                            floorPlanIframe,
+                            'h8m1gx75u1bezk7yaw7yggzwb',
+                            ''
+                        );
+
+                        // Create and setup position marker
+                        const marker = createFloorPlanMarker();
+                        setupSynchronization(sdk, floorPlanSdk, marker);
+                        
+                        console.log('Successfully connected to both SDKs');
+                        resolve({ modelSdk: sdk, floorPlanSdk: floorPlanSdk });
+                    } catch (err) {
+                        console.error('Error connecting to SDKs:', err);
+                        reject(err);
+                    }
+                }, 2000);
+            } catch (error) {
+                console.error('Error in SDK initialization:', error);
+                reject(error);
+            }
+        });
+    });
+}
+
+// Create a marker for position tracking
+function createFloorPlanMarker() {
+    const marker = document.createElement('div');
+    marker.className = 'position-marker';
+    marker.style.cssText = `
+        width: 12px;
+        height: 12px;
+        background-color: #ff0000;
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        z-index: 1000;
+        box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    `;
+    
+    const container = document.querySelector('.model-viewer');
+    container.appendChild(marker);
+    return marker;
+}
+
+// Setup synchronization between 3D view and floor plan
+function setupSynchronization(modelSdk, floorPlanSdk, marker) {
+    // Ensure floor plan mode
+    ensureFloorPlanMode(floorPlanSdk);
+    
+    // Track position changes in 3D view
+    modelSdk.Camera.pose.subscribe(function(pose) {
+        updateMarkerPosition(pose, marker, floorPlanSdk);
+    });
+}
+
+// Update marker position based on camera movement
+async function updateMarkerPosition(pose, marker, floorPlanSdk) {
+    try {
+        // Get current position from 3D view
+        const position = pose.position;
+        
+        // Get floor plan bounds for proper scaling
+        const bounds = await floorPlanSdk.Floor.getBounds();
+        
+        // Convert 3D coordinates to floor plan coordinates
+        const coords = convertToFloorPlanCoordinates(position, bounds);
+        
+        // Update marker position
+        marker.style.left = `${coords.x}px`;
+        marker.style.top = `${coords.y}px`;
+        
+        console.log('Updated marker position:', coords);
+    } catch (error) {
+        console.error('Error updating marker position:', error);
     }
-
-    console.log("Current Mode:", await sdk.Mode.getCurrentMode());
-    console.log("Switching to FLOORPLAN mode...");
-
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    await sdk.Mode.moveTo(sdk.Mode.Mode.FLOORPLAN, {
-      transition: sdk.Mode.TransitionType.FLY
-    });
-
-    await sdk.Floor.showAll();
-    await sdk.Camera.setRotation({
-      x: -85,
-      y: 0,
-      z: 0
-    });
-    console.log("Successfully switched to FLOORPLAN mode.");
-  } catch (error) {
-    console.error("Error ensuring FLOORPLAN mode:", error);
-  }
 }
 
-// Function to extract position from the deep link
-function extractPositionFromDeepLink(deepLink) {
-  // Implement logic to parse the deep link and return the position
-  // For example, if the deep link contains coordinates in the URL, extract them
-  // This is a placeholder implementation; adjust based on your deep link format
-  return { x: 0, y: 0, z: 0 }; // Replace with actual logic
+// Convert 3D coordinates to floor plan coordinates
+function convertToFloorPlanCoordinates(position, bounds) {
+    // Get the floor plan container dimensions
+    const container = document.getElementById('floorPlanFrame');
+    const containerRect = container.getBoundingClientRect();
+    
+    // Calculate scale factors
+    const scaleX = containerRect.width / (bounds.max.x - bounds.min.x);
+    const scaleZ = containerRect.height / (bounds.max.z - bounds.min.z);
+    
+    // Convert coordinates
+    const x = ((position.x - bounds.min.x) * scaleX) + containerRect.left;
+    const y = ((position.z - bounds.min.z) * scaleZ) + containerRect.top;
+    
+    return { x, y };
 }
 
-// Function to get the deep link based on the area
-function getDeepLinkForArea(area) {
-  const deepLinks = {
-    'Class 3A': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=55&play=1&sr=-2.86,1.43',
-    'Class 4A': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=43&play=1&sr=-2.19,1.05',
-    'Class 3B': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=39&play=1&sr=-2.96,-.73',
-    'Class 1A': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=32&play=1&sr=',
-    'HM Room': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=3&play=1&sr=',
-    'Kitchen Room': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&play=1&ss=10&sr=-2.32,1.24',
-    'Toilets': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=24&play=1&sr=-1.68,-1.32',
-    'Library': 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=17&play=1&sr=-3.02,-.29',
-    'Store Room': 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=13&play=1&sr=-3.14',
-    'Class 2A': 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=24&play=1&sr=-.2,-.08',
-    'Class 5B': 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=3&play=1&sr=-3.14',
-    'Toilets2': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=24&play=1&sr=-1.68,-1.32',
-    'Seminar Hall': 'https://my.matterport.com/show/?m=KKsNGzHP2M6&cloudEdit=1&play=1&ss=6&sr=-.11,.94',
-    'Seminar Hall -2': 'https://my.matterport.com/show/?m=KKsNGzHP2M6&cloudEdit=1&play=1&ss=6&sr=-.11,.94'
-  };
-  return deepLinks[area] || '';
+// Ensure floor plan is in proper mode
+async function ensureFloorPlanMode(sdk) {
+    try {
+        await sdk.Mode.moveTo(sdk.Mode.Mode.floorplan);
+        console.log('Switched to floor plan mode');
+    } catch (error) {
+        console.error('Error switching to floor plan mode:', error);
+    }
 }
 
 // Add checkbox for toggling layer visibility
@@ -385,92 +451,6 @@ async function addLayerCheckbox(layerName, color) {
   layerContainer.appendChild(container);
 }
 
-// Ensure Floor Plan Mode
-async function ensureFloorPlanMode(sdk) {
-  try {
-    if (!sdk) {
-      console.error("SDK is not initialized.");
-      return;
-    }
-
-    console.log("Current Mode:", await sdk.Mode.getCurrentMode());
-    console.log("Switching to FLOORPLAN mode...");
-
-    // Introduce a delay before switching modes
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Wait for 1 second
-
-    await sdk.Mode.moveTo(sdk.Mode.Mode.FLOORPLAN, {
-      transition: sdk.Mode.TransitionType.FLY
-    });
-
-    await sdk.Floor.showAll();
-    await sdk.Camera.setRotation({
-      x: -85,
-      y: 0,
-      z: 0
-    });
-    console.log("Successfully switched to FLOORPLAN mode.");
-  } catch (error) {
-    console.error("Error ensuring FLOORPLAN mode:", error);
-  }
-}
-
-// Initialize Matterport SDK for 3D view with deeplink
-async function initializeMatterportSdk(deepLink) {
-  const iframe = document.getElementById('modelFrame');
-  try {
-    const sdk = await window.MP_SDK.connect(iframe);
-    console.log('Connected to Matterport SDK:', sdk);
-    return sdk;
-  } catch (error) {
-    console.error('Error connecting to Matterport SDK:', error);
-    return null;
-  }
-}
-
-// Create a marker on the floor plan
-function createFloorPlanMarker(floorPlan) {
-  const marker = document.createElement('div');
-  marker.id = 'location-marker';
-  marker.style.position = 'absolute';
-  marker.style.width = '10px';
-  marker.style.height = '10px';
-  marker.style.backgroundColor = 'red';
-  marker.style.borderRadius = '50%'; // Make it circular
-  floorPlan.appendChild(marker);
-  return marker;
-}
-
-// Listen for position changes in the 3D view
-function listenForPositionChanges(sdk, marker) {
-  if (!sdk) {
-    console.error('SDK not initialized. Cannot listen for position changes.');
-    return;
-  }
-  sdk.Camera.pose.subscribe((pose) => {
-    const position = pose.position;
-    updateMarkerPosition(position, marker);
-  });
-}
-
-// Function to update marker position
-function updateMarkerPosition(position, marker) {
-  // Convert 3D position to 2D floor plan coordinates
-  const floorPlanPosition = convertToFloorPlanCoordinates(position);
-  marker.style.left = `${floorPlanPosition.x}px`;
-  marker.style.top = `${floorPlanPosition.y}px`;
-}
-
-// Function to convert 3D coordinates to 2D floor plan coordinates
-function convertToFloorPlanCoordinates(position) {
-  // Implement your logic here to map 3D coordinates to 2D
-  // This is a placeholder; you'll need to adjust based on your floor plan
-  return {
-    x: position.x * scaleFactor, // Scale factor based on your floor plan
-    y: position.y * scaleFactor
-  };
-}
-
 // Toggle layer visibility
 function toggleLayerVisibility(layerName) {
   const isVisible = !polygonVisibility[layerName];
@@ -482,18 +462,14 @@ function toggleLayerVisibility(layerName) {
   map.setLayoutProperty(`${layerName}Line`, 'visibility', visibility);
 }
 
-let currentFloor = null; // This will store the currently selected floor
-let currentMarkers = []; // This will store the markers for the current floor
-let currentLabelLayers = []; // This will store the label layers for the current floor
+let currentFloor = null; 
+let currentMarkers = []; 
+let currentLabelLayers = []; 
 
 function handleFloorSelection(floor) {
-  // If a floor is already selected, remove its markers and labels
-  console.log(floor)
   if (currentFloor !== null) {
-      // Remove the markers associated with the previous floor
       currentMarkers.forEach(marker => marker.remove());
       
-      // Remove the label layers associated with the previous floor
       currentLabelLayers.forEach(layerId => {
           if (map.getLayer(layerId)) {
               map.removeLayer(layerId);
@@ -501,18 +477,15 @@ function handleFloorSelection(floor) {
           }
       });
 
-      // Clear the previous floor's marker and label arrays
       currentMarkers = [];
       currentLabelLayers = [];
   }
 
-  // Store the new selected floor
   currentFloor = floor;
   const filteredFeatures = geojsonData.features.filter(
       feature => feature.properties.Floor === floor
   );
 
-  // Now add markers and labels for the new selected floor
   filteredFeatures.forEach(feature => {
     if (feature.properties.Floor === currentFloor) {
       const el = document.createElement('div');
@@ -527,11 +500,11 @@ function handleFloorSelection(floor) {
       })
           .setLngLat(feature.geometry.coordinates)
           .addTo(map);
-
-      // Create a label layer ID specific to the feature
+      el.addEventListener('click', () => {
+            openModelViewerForFloor(feature.properties.Space)
+      });
       const labelLayerId = `${feature.properties.Space}-label`;
 
-      // Add a new GeoJSON source for the labels
       map.addSource(labelLayerId, {
           type: 'geojson',
           data: {
@@ -546,15 +519,14 @@ function handleFloorSelection(floor) {
           },
       });
 
-      // Add a symbol layer for the labels
       map.addLayer({
           id: labelLayerId,
           type: 'symbol',
           source: labelLayerId,
           layout: {
-              'text-field': ['get', 'space'], // Use the space property to label the marker
+              'text-field': ['get', 'space'], 
               'text-size': 16,
-              'text-anchor': 'bottom',
+              'text-anchor': 'top',
           },
           paint: {
               'text-color': '#000000',
@@ -563,7 +535,6 @@ function handleFloorSelection(floor) {
           },
       });
 
-      // Store the markers and label layers
       currentMarkers.push(marker);
       currentLabelLayers.push(labelLayerId);
     }
@@ -600,27 +571,224 @@ const markerStyles = `
 }
 
 .marker[data-floor="Block1 Ground"] {
-  background-color: #4CAF50;  /* Green */
+  background-color: #4CAF50;  
 }
 
 .marker[data-floor="BlockUN Ground"] {
-  background-color: #2196F3;  /* Blue */
+  background-color: #2196F3;  
 }
 
 .marker[data-floor="Block3 Ground"] {
-  background-color: #FF9800;  /* Orange */
+  background-color: #FF9800;  
 }
 
 .marker[data-floor="Block4 Ground"] {
-  background-color:rgb(243, 33, 166);  /* Blue */
+  background-color:rgb(243, 33, 166);  
 }
 
 .marker[data-floor="Block4 First"] {
-  background-color:rgb(251, 23, 31);  /* Orange */
+  background-color:rgb(251, 23, 31);  
 }
 
-}
 `;
+
+// Function to get the deep link based on the area
+function getDeepLinkForArea(area) {
+    const deepLinks = {
+      'Class 3A': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=55&play=1&sr=-2.86,1.43',
+      'Class 4A': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=43&play=1&sr=-2.19,1.05',
+      'Class 3B': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=39&play=1&sr=-2.96,-.73',
+      'Class 1A': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=32&play=1&sr=',
+      'HM Room': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=3&play=1&sr=',
+      'Kitchen Room': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&play=1&ss=10&sr=-2.32,1.24',
+      'Toilets': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=24&play=1&sr=-1.68,-1.32',
+      'Library': 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=17&play=1&sr=-3.02,-.29',
+      'Store Room': 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=13&play=1&sr=-3.14',
+      'Class 2A': 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=24&play=1&sr=-.2,-.08',
+      'Class 5B': 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=3&play=1&sr=-3.14',
+      'Girls Toilets': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=24&play=1&sr=-1.68,-1.32',
+      'Seminar Hall': 'https://my.matterport.com/show/?m=KKsNGzHP2M6&cloudEdit=1&play=1&ss=6&sr=-.11,.94'
+      
+    };
+    return deepLinks[area] || '';
+  }
+// Initialize Matterport SDK for 3D view
+async function initializeMatterportSdk(deepLink) {
+  const iframe = document.getElementById('modelFrame');
+  const maxRetries = 3;
+  let retryCount = 0;
+
+  return new Promise((resolve, reject) => {
+    const tryConnect = async () => {
+      try {
+        if (!iframe.contentWindow || !iframe.contentWindow.MP_SDK) {
+          if (retryCount < maxRetries) {
+            retryCount++;
+            console.log(`Retry attempt ${retryCount} for Model SDK`);
+            setTimeout(tryConnect, 2000);
+            return;
+          }
+          throw new Error('MP_SDK not available');
+        }
+
+        const sdk = await iframe.contentWindow.MP_SDK.connect(
+          iframe,
+          'h8m1gx75u1bezk7yaw7yggzwb',
+          ''
+        );
+        console.log('Model SDK connected successfully');
+        resolve(sdk);
+      } catch (err) {
+        console.error('Error connecting to Model SDK:', err);
+        if (retryCount < maxRetries) {
+          retryCount++;
+          console.log(`Retry attempt ${retryCount} for Model SDK`);
+          setTimeout(tryConnect, 2000);
+        } else {
+          reject(err);
+        }
+      }
+    };
+
+    iframe.addEventListener('load', tryConnect);
+  });
+}
+
+// Initialize Floor Plan SDK
+async function initializeFloorPlanSdk(deepLink) {
+  const iframe = document.getElementById('floorPlanFrame');
+  const maxRetries = 3;
+  let retryCount = 0;
+
+  return new Promise((resolve, reject) => {
+    const tryConnect = async () => {
+      try {
+        if (!iframe.contentWindow || !iframe.contentWindow.MP_SDK) {
+          if (retryCount < maxRetries) {
+            retryCount++;
+            console.log(`Retry attempt ${retryCount} for Floor Plan SDK`);
+            setTimeout(tryConnect, 2000);
+            return;
+          }
+          throw new Error('MP_SDK not available');
+        }
+
+        const sdk = await iframe.contentWindow.MP_SDK.connect(
+          iframe,
+          'h8m1gx75u1bezk7yaw7yggzwb',
+          ''
+        );
+        await ensureFloorPlanMode(sdk);
+        console.log('Floor Plan SDK connected successfully');
+        resolve(sdk);
+      } catch (err) {
+        console.error('Error connecting to Floor Plan SDK:', err);
+        if (retryCount < maxRetries) {
+          retryCount++;
+          console.log(`Retry attempt ${retryCount} for Floor Plan SDK`);
+          setTimeout(tryConnect, 2000);
+        } else {
+          reject(err);
+        }
+      }
+    };
+
+    iframe.addEventListener('load', tryConnect);
+  });
+}
+
+// Create marker for position tracking
+function createFloorPlanMarker() {
+  const marker = document.createElement('div');
+  marker.className = 'position-marker';
+  
+  const floorPlanFrame = document.getElementById('floorPlanFrame');
+  const container = floorPlanFrame.parentElement;
+  container.appendChild(marker);
+  
+  return marker;
+}
+
+// Setup synchronization between 3D view and floor plan
+function setupSynchronization(modelSdk, floorPlanSdk, marker) {
+  modelSdk.Camera.pose.subscribe(function(pose) {
+    updateMarkerPosition(pose, marker, floorPlanSdk);
+  });
+}
+
+// Update marker position based on camera movement
+async function updateMarkerPosition(pose, marker, floorPlanSdk) {
+  try {
+    const bounds = await floorPlanSdk.Floor.getBounds();
+    const coords = convertToFloorPlanCoordinates(pose.position, bounds);
+    
+    marker.style.left = `${coords.x}px`;
+    marker.style.top = `${coords.y}px`;
+  } catch (error) {
+    console.error('Error updating marker position:', error);
+  }
+}
+
+// Convert 3D coordinates to floor plan coordinates
+function convertToFloorPlanCoordinates(position, bounds) {
+  const container = document.getElementById('floorPlanFrame');
+  const rect = container.getBoundingClientRect();
+  
+  // Calculate scale factors
+  const scaleX = rect.width / (bounds.max.x - bounds.min.x);
+  const scaleZ = rect.height / (bounds.max.z - bounds.min.z);
+  
+  // Convert coordinates
+  const x = ((position.x - bounds.min.x) * scaleX);
+  const y = ((position.z - bounds.min.z) * scaleZ);
+  
+  return { x, y };
+}
+
+// Ensure floor plan is in proper mode
+async function ensureFloorPlanMode(sdk) {
+  try {
+    await sdk.Mode.moveTo(sdk.Mode.Mode.floorplan);
+    await sdk.Camera.setRotation({ x: -90, y: 0, z: 0 });
+    console.log('Switched to floor plan mode');
+  } catch (error) {
+    console.error('Error switching to floor plan mode:', error);
+  }
+}
+
+// Close model viewer function
+function closeModelViewer() {
+  const modelViewer = document.querySelector('.model-viewer');
+  const modelOverlay = document.querySelector('.model-overlay');
+  const modelFrame = document.getElementById('modelFrame');
+  const floorPlanFrame = document.getElementById('floorPlanFrame');
+  const mapContainer = document.getElementById('map-container');
+  
+  mapContainer.classList.remove('shifted');
+  modelViewer.classList.remove('active');
+  modelOverlay.classList.remove('active');
+  
+  // Clear iframes
+  modelFrame.src = '';
+  floorPlanFrame.src = '';
+  
+  // Remove marker if it exists
+  const marker = document.querySelector('.position-marker');
+  if (marker) {
+    marker.remove();
+  }
+}
+
+// Add model overlay to the DOM if it doesn't exist
+function ensureModelOverlay() {
+  let modelOverlay = document.querySelector('.model-overlay');
+  if (!modelOverlay) {
+    modelOverlay = document.createElement('div');
+    modelOverlay.className = 'model-overlay';
+    document.body.appendChild(modelOverlay);
+  }
+  return modelOverlay;
+}
 
 const styleSheet = document.createElement('style');
 styleSheet.textContent = markerStyles;
@@ -631,145 +799,12 @@ document.querySelector('.close-button').addEventListener('click', () => {
   const modelOverlay = document.querySelector('.model-overlay');
   const modelFrame = document.getElementById('modelFrame');
   const floorPlanFrame = document.getElementById('floorPlanFrame');
-  document.getElementById('map-container').classList.add('shifted'); // Shift the map
+  const mapContainer = document.getElementById('map-container');
+  mapContainer.classList.remove('shifted'); 
   modelViewer.classList.remove('active');
   modelOverlay.classList.remove('active');
   modelFrame.src = '';
   floorPlanFrame.src = '';
 });
-
-function openModelViewerForFloor(area) {
-  console.log(`Opening model for ${area}`);
-  const modelViewer = document.querySelector('.model-viewer');
-  const modelOverlay = document.querySelector('.model-overlay');
-  const modelFrame = document.getElementById('modelFrame');
-  const floorPlanFrame = document.getElementById('floorPlanFrame');
-  
-  const deepLink = getDeepLinkForArea(area);
-  
-  if (deepLink) {
-    modelFrame.src = deepLink;
-    floorPlanFrame.src = deepLink;
-  } else {
-    console.error('No deep link available for this area.');
-    return;
-  }
-  
-  modelViewer.classList.add('active');
-  modelOverlay.classList.add('active');
-  
-  modelFrame.addEventListener('load', async () => {
-    try {
-      const sdk = await initializeMatterportSdk(deepLink);
-      console.log('Connected to 3D Model SDK:', sdk);
-
-      const floorPlan = document.getElementById('floor-plan');
-      const marker = createFloorPlanMarker(floorPlan);
-      listenForPositionChanges(sdk, marker);
-
-      setTimeout(async () => {
-        await ensureFloorPlanMode(sdk);
-      }, 1000);
-    } catch (error) {
-      console.error('Error connecting to 3D Model SDK:', error);
-    }
-  });
-}
-
-async function initializeMatterportSdk(deepLink) {
-  const iframe = document.getElementById('modelFrame');
-  try {
-    const sdk = await window.MP_SDK.connect(iframe);
-    console.log('Connected to Matterport SDK:', sdk);
-    return sdk;
-  } catch (error) {
-    console.error('Error connecting to Matterport SDK:', error);
-    return null;
-  }
-}
-
-function createFloorPlanMarker(floorPlan) {
-  const marker = document.createElement('div');
-  marker.id = 'location-marker';
-  marker.style.position = 'absolute';
-  marker.style.width = '10px';
-  marker.style.height = '10px';
-  marker.style.backgroundColor = 'red';
-  marker.style.borderRadius = '50%';
-  floorPlan.appendChild(marker);
-  return marker;
-}
-
-function listenForPositionChanges(sdk, marker) {
-  if (!sdk) {
-    console.error('SDK not initialized. Cannot listen for position changes.');
-    return;
-  }
-  sdk.Camera.pose.subscribe((pose) => {
-    const position = pose.position;
-    updateMarkerPosition(position, marker);
-  });
-}
-
-function updateMarkerPosition(position, marker) {
-  const floorPlanPosition = convertToFloorPlanCoordinates(position);
-  marker.style.left = `${floorPlanPosition.x}px`;
-  marker.style.top = `${floorPlanPosition.y}px`;
-}
-
-function convertToFloorPlanCoordinates(position) {
-  return {
-    x: position.x * scaleFactor,
-    y: position.y * scaleFactor
-  };
-}
-
-async function ensureFloorPlanMode(sdk) {
-  try {
-    if (!sdk) {
-      console.error("SDK is not initialized.");
-      return;
-    }
-
-    console.log("Current Mode:", await sdk.Mode.getCurrentMode());
-    console.log("Switching to FLOORPLAN mode...");
-
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    await sdk.Mode.moveTo(sdk.Mode.Mode.FLOORPLAN, {
-      transition: sdk.Mode.TransitionType.FLY
-    });
-
-    await sdk.Floor.showAll();
-    await sdk.Camera.setRotation({
-      x: -85,
-      y: 0,
-      z: 0
-    });
-    console.log("Successfully switched to FLOORPLAN mode.");
-  } catch (error) {
-    console.error("Error ensuring FLOORPLAN mode:", error);
-  }
-}
-
-function getDeepLinkForArea(area) {
-  const deepLinks = {
-    'Class 3A': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&play=1&qs=1&ss=55&sr=-2.86,1.43',
-    'Class 4A': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&play=1&qs=1&ss=43&sr=-2.19,1.05',
-    'Class 3B': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&play=1&qs=1&ss=39&sr=-2.96,-.73',
-    'Class 1A': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&play=1&qs=1&ss=32&sr=',
-    'HM Room': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&play=1&qs=1&ss=3&sr=',
-    'Kitchen Room': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&play=1&qs=1&ss=10&sr=-2.32,1.24',
-    'Toilets': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&play=1&qs=1&ss=24&sr=-1.68,-1.32',
-    'Library': 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&play=1&qs=1&ss=17&sr=-3.02,-.29',
-    'Store Room': 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&play=1&qs=1&ss=13&sr=-3.14',
-    'Class 2A': 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&play=1&qs=1&ss=24&sr=-.2,-.08',
-    'Class 5B': 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&play=1&qs=1&ss=3&sr=-3.14',
-    'Toilets2': 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&play=1&qs=1&ss=24&sr=-1.68,-1.32',
-    'Seminar Hall': 'https://my.matterport.com/show/?m=KKsNGzHP2M6&cloudEdit=1&play=1&qs=1&ss=6&sr=-.11,.94',
-    'Seminar Hall -2': 'https://my.matterport.com/show/?m=KKsNGzHP2M6&cloudEdit=1&play=1&qs=1&ss=6&sr=-.11,.94'
-  };
-  return deepLinks[area] || '';
-}
 
 initializeMap();

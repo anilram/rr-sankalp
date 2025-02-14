@@ -1,0 +1,79 @@
+{
+    "type": "FeatureCollection",
+    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "floors": [
+      "Block 1 Floor 1", "Block 2 Floor 1", "Block 3 Floor 1"
+    ],
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110419814",
+          "Space": "Class 4A",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.688922057396667, 21.251906656728249]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110419814",
+          "Space": "Class Room",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.6890173732112, 21.251916339548192]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110419814",
+          "Space": "Class 3A",
+          "Floor": "Block 2 Floor 1",
+          "Block": "Block 2",
+          "layer": "Block 2 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.689057437170888, 21.251823884256595]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110419814",
+          "Space": "Class 1A",
+          "Floor": "Block 2 Floor 1",
+          "Block": "Block 2",
+          "layer": "Block 2 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.689051273484779, 21.251766356519603]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110419814",
+          "Space": "Toilets",
+          "Floor": "Block 3 Floor 1",
+          "Block": "Block 3",
+          "layer": "Block 3 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.689073625038176, 21.25164029198525]
+        }
+      }
+    ]
+  }

@@ -1,6 +1,6 @@
 /* Sidebar for layer checkboxes */
 .layer-sidebar {
-    margin-left: 0;
+    margin-left: 7px;
     width: 230px;
     background-color: rgba(255, 255, 255, 0.9);
     overflow-y: auto;
@@ -38,19 +38,24 @@
   
   /* Map container */
   .map-container {
-    width: 100vw;
-    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.4s ease;
   }
   #map-container {
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
-    transition: margin-left 0.4s ease; /* Smooth transition for the map */
-}
-
-#map-container.shifted {
-    margin-left: 0; /* Move the map 20% to the left */
-}
-  
+    transition: transform 0.4s ease;
+  }
+  #map-container.shifted {
+    transform: translateX(-25%);
+  }
   
   /* Marker for map locations */
   .marker {
@@ -107,23 +112,15 @@
 
 /* Sidebar Styles */
 .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
     width: 250px;
     height: 100vh;
-    background-color: #f4f4f9;
-    padding: 10px;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-    overflow-y: auto;
-    box-sizing: border-box;
-    position: fixed;
-    left: -250px;
-    transition: left 0.3s ease-in-out;
+    background-color: white;
+    transition: left 0.4s ease;
     z-index: 1000;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.sidebar::-webkit-scrollbar {
-    display: none;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar.active {
@@ -133,49 +130,65 @@
 /* Toggle Button Style */
 .sidebar-toggle {
     position: fixed;
-    left: 20px;
     top: 20px;
-    z-index: 998;
-    background: #4CAF50;
-    color: white;
+    left: 20px;
+    z-index: 1001;
+    background: #2196F3;
     border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
+    padding: 12px;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: all 0.3s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .sidebar-toggle:hover {
-    background: #45a049;
-    transform: scale(1.1);
-}
-
-.sidebar-toggle.active {
-    left: 200px;
-    z-index:1200;
-    margin: -10px;
+    background: #1976D2;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
 }
 
 .sidebar-toggle i {
+    color: white;
     font-size: 20px;
-    transition: transform 0.3s ease;
+    transition: all 0.4s ease;
+}
+
+.sidebar-toggle.active {
+    left: 270px;
+    background: #E91E63;
 }
 
 .sidebar-toggle.active i {
     transform: rotate(180deg);
 }
 
+.sidebar-toggle:active {
+    transform: scale(0.95);
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(33, 150, 243, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(33, 150, 243, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(33, 150, 243, 0);
+    }
+}
+
+.sidebar-toggle:not(.active) {
+    animation: pulse 2s infinite;
+}
+
 /* Content and Model Viewer Styles */
 .content-container {
-    flex: 1;
-    margin-left: 0;
-    transition: margin-left 0.3s ease-in-out;
     position: relative;
+    flex: 1;
+    overflow: hidden;
+    transition: all 0.4s ease;
 }
 
 .content-container.shifted {
@@ -184,7 +197,6 @@
 
 /* Enhanced 3D Viewer Styles */
 .model-viewer {
-    
     position: fixed;
     top: 0;
     right: -50%;
@@ -198,11 +210,10 @@
     border: 1px solid rgba(255, 255, 255, 0.5);
     padding: 0;
     box-sizing: border-box;
-    transition:right 0.4s ease;
+    transition: right 0.4s ease;
 }
 
 .model-viewer.active {
-    
     right: 0;
 }
 
@@ -389,15 +400,16 @@
     font-size: 18px;
     font-weight: bold;
     color: #333;
-    margin: 15px 0;
+    margin: 20px 0;
     padding-bottom: 8px;
+    padding-left:10px;
     border-bottom: 2px solid #4CAF50;
 }
 .subsection-title {
     font-size: 16px;
     font-weight: bold;
     color: #333;
-    margin: 10px 0;
+    margin: 20px 0;
     padding-bottom: 8px;
 }
 
@@ -405,11 +417,6 @@
     height: 2px;
     background-color: #e0e0e0;
     margin: 20px 0;
-}
-
-#map-container {
-    height: 100%;
-    width: 100%;
 }
 
 /* Animation for sidebar elements */
@@ -437,4 +444,29 @@
 .sidebar.active .model-btn:nth-child(4) { transition-delay: 0.6s; }
 .sidebar.active .model-btn:nth-child(5) { transition-delay: 0.7s; }
 .sidebar.active .model-btn:nth-child(6) { transition-delay: 0.8s; }
-  
+
+.position-marker {
+    width: 12px;
+    height: 12px;
+    background-color: #ff0000;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 0 4px rgba(0,0,0,0.5);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 0, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    }
+}

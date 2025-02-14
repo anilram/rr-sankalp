@@ -1,6 +1,7 @@
 {
 "type": "FeatureCollection",
 "name": "E:\\Projects\\Sankalp\\Mapview\\sankalp\\bundle\\assets\\22110429807_features.geojson",
+"schoolname_code":"Shashkiya Naveen Primary School UDISE:22110429807",
 "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
 "features": [
 { "type": "Feature", "properties": { "LENGTH": "39.455 m", "ENCLOSED_AREA": "0.0000892 sq km", "SINUOSITY": "0", "UDISE": "22110429807", "Room": "", "Floor": "", "Block": "", "layer": "Block2" }, "geometry": { "type": "LineString", "coordinates": [ [ 81.614502914199122, 21.233674214260304 ], [ 81.614546037785317, 21.233719656318868 ], [ 81.614463500168739, 21.23380173024097 ], [ 81.614413421165423, 21.233756751876879 ], [ 81.614502914199122, 21.233674214260304 ], [ 81.614502914199122, 21.233674214260304 ] ] } },

@@ -1,0 +1,317 @@
+{
+    "type": "FeatureCollection",
+    "crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+    "floors": [
+      "Block2 Floor1", "Block4 Floor1", "Block5 Floor1"
+    ],
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Sports Room",
+          "Floor": "Block 4 Floor 1",
+          "Block": "Block 4",
+          "layer": "Block 4 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.648935470497719, 21.247393985264342]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Principal Room",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.649032971781295, 21.247041691193978]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Class 8B",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.648999244501312, 21.246979590170529]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Toilets",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.648862193966806, 21.246920165915327]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Robotics Lab",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.648890567710268, 21.246990297243535]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Class 4A",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.64884720406458, 21.247016529572409]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Class 7B",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.648873971747108, 21.247110216461234]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Class Room",
+          "Floor": "Block 4 Floor 1",
+          "Block": "Block 4",
+          "layer": "Block 4 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.648911456416585, 21.247503706351324]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Staff Room",
+          "Floor": "Block 4 Floor 1",
+          "Block": "Block 4",
+          "layer": "Block 4 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.648972888247982, 21.247527194992738]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Principal Room",
+          "Floor": "Block 4 Floor 1",
+          "Block": "4",
+          "layer": "Block 4 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.648990956433678, 21.247458535887063]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Staff Room",
+          "Floor": "Block 5 Floor 1",
+          "Block": "Block 5",
+          "layer": "Block 5 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.649327024687778, 21.247268819937172]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Class 1B",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.649411945160594, 21.247227263110052]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Class 1",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.64942549629987, 21.247175768780792]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "UKG",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.64942549629987, 21.247175768780792]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "LKG",
+          "Floor": "Block 5 Floor 1",
+          "Block": "Block 5",
+          "layer": "Block 5 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.649425053889487, 21.247037038794797]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Girls Toilets",
+          "Floor": "Block 5 Floor 1",
+          "Block": "Block 5",
+          "layer": "Block 5 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.649370946690638, 21.247076757632595]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Boys Toilets",
+          "Floor": "Block 5 Floor 1",
+          "Block": "Block 5",
+          "layer": "Block 5 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.649328020476204, 21.247085354380058]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Class Room",
+          "Floor": "Block 5 Floor 1",
+          "Block": "Block 5",
+          "layer": "Block 5 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.649090287539352, 21.24755375773519]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Class 3",
+          "Floor": "Block 1 Floor 1",
+          "Block": "Block 1",
+          "layer": "Block 1 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.649142083005032, 21.247547735006624]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Computer Lab",
+          "Floor": "Block 4 Floor 1",
+          "Block": "Block 4",
+          "layer": "Block 4 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.649130037547906, 21.247522439546636]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Toilets",
+          "Floor": "Block 4 Floor 1",
+          "Block": "Block 4",
+          "layer": "Block 4 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.649136060276476, 21.247595916835166]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "UDISE": "22110403707",
+          "Space": "Toilets",
+          "Floor": "Block 4 Floor 1",
+          "Block": "Block 4",
+          "layer": "Block 4 Floor 1"
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [81.649197492107859, 21.247594712289452]
+        }
+      }
+    ]
+  }

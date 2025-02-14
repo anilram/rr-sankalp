@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "E:\\Projects\\Sankalp\\Mapview\\sankalp\\bundle\\assets\\2211048501_features.geojson",
+"schoolname_code":"Pandit Shantaram Dubey School UDISE:22110428501",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "PERIMETER": "200.01 m", "ENCLOSED_AREA": "0.002429 sq km", "layer": "School" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 81.618868727729861, 21.240705653429476 ], [ 81.619430994877376, 21.240723989352695 ], [ 81.619500087114417, 21.241064620303639 ], [ 81.619010202909678, 21.241151194667406 ], [ 81.618868727729861, 21.240705653429476 ] ] ] } },
+{ "type": "Feature", "properties": { "ENCLOSED_AREA": "0.0004511 sq km", "layer": "Block 1", "LENGTH": "118.26 m", "SINUOSITY": "0", "USIDE": "22110428501", "Room": "", "Floor": "", "Block": "" }, "geometry": { "type": "LineString", "coordinates": [ [ 81.618997972935446, 21.240802011324213 ], [ 81.619430994877376, 21.240723989352695 ], [ 81.619447249454765, 21.240803961873503 ], [ 81.619100051681514, 21.240865079084525 ], [ 81.619106553512481, 21.240906040619571 ], [ 81.619021379526899, 21.240919694464587 ], [ 81.618997972935446, 21.240802011324213 ], [ 81.618997972935446, 21.240802011324213 ] ] } }
+]
+}

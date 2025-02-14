@@ -1,18 +1,17 @@
 {
-  "name": "my-node-app",
+  "name": "sankalp3",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node backend/server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "express": "^4.21.1",
-    "http-proxy-middleware": "^3.0.3"
+    "express": "^4.17.1",
+    "http-proxy-middleware": "^3.0.3",
+    "mysql2": "^2.2.5"
   }
 }
-
- 
