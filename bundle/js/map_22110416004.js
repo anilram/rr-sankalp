@@ -224,26 +224,25 @@ function addPannel(geojsonData) {
 function getSubButtonsForFloor(floor) {
   const subButtons = {
     'Block1 Floor1': [
-      { name: 'Class 3A', url: 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=55&play=1&sr=-2.86,1.43' },
+      { name: 'Class 3A', url: 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=55&sr=-2.86,1.43' },
       { name: 'Class 4A', url: 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=43&sr=-2.19,1.05' },
       { name: 'Class 3B', url: 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=39&sr=-2.96,-.73' },
       { name: 'Class 1A', url: 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=32&sr=' },
       { name: 'HM Room', url: 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=3&sr=' },
-      { name: 'Kitchen Room', url: 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=10&sr=-2.32,1.24' },
-      { name: 'Toilets', url: 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=24&sr=-1.68,-1.32' }
+      { name: 'Kitchen Room', url: 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=13&sr=-2.79,.31' },
+      { name: 'Toilets', url: 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=21&sr=-2.47,.41' }
     ],
     'Block1 Floor2': [
-      { name: 'Library', url: 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=17&sr=-3.02,-.29' },
+      { name: 'Library', url: 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=17&sr=-.38,.08' },
       { name: 'Store Room', url: 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=13&sr=-3.14' },
       { name: 'Class 2A', url: 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=24&sr=-.2,-.08' },
       { name: 'Class 5B', url: 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=3&sr=-3.14' },
-      { name: 'Girls Toilets', url: 'https://my.matterport.com/show/?m=zUqyeDKr71d&cloudEdit=1&ss=24&sr=-1.68,-1.32' }
-      
+      { name: 'Girls Toilets', url: 'https://my.matterport.com/show/?m=CPpHn54PdoV&cloudEdit=1&ss=50&sr=-3.08,.45' }
     ],
     'Block1 Floor3': [
       { name: 'Seminar Hall', url: 'https://my.matterport.com/show/?m=KKsNGzHP2M6&cloudEdit=1&ss=6&sr=-.11,.94' }
     ]
-  };
+};
   return subButtons[floor] || [];
 }
 

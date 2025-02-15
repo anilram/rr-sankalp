@@ -224,9 +224,9 @@ function addPannel(geojsonData) {
 function getSubButtonsForFloor(floor) {
   const subButtons = {
     'Block 1 Floor 1': [
-      { name: 'Store Room', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.656633960150856,21.264170686919723' },
-      { name: 'Class 1', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.65664381465902,21.264127162842001' },
-      { name: 'Class 4', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.656696372035896,21.264110738661728' }
+      { name: 'Store Room', url:'https://my.matterport.com/show/?m=Lj7vzrjfpb8&cloudEdit=1&play=1&qs=1&ss=17&sr=-2.75,.53' },
+      { name: 'Class 1', url: 'https://my.matterport.com/show/?m=bm8vfcUGTKv&cloudEdit=1&play=1&qs=1&ss=15&sr=-.47,-.56' },
+      { name: 'Class 4', url: 'https://my.matterport.com/show/?m=bm8vfcUGTKv&cloudEdit=1&play=1&qs=1&ss=38&sr=-2.05,1.23' }
     ],
     'Block 4 Floor 1': [
       { name: 'Toilets', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.65675632029388,21.264201892862243' },
@@ -584,9 +584,9 @@ const markerStyles = `
 // Function to get the deep link based on the area
 function getDeepLinkForArea(area) {
   const deepLinks = {
-    'Store Room': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.656633960150856,21.264170686919723',
-    'Class 1': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.65664381465902,21.264127162842001',
-    'Class 4': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.656696372035896,21.264110738661728',
+    'Store Room': 'https://my.matterport.com/show/?m=Lj7vzrjfpb8&cloudEdit=1&play=1&qs=1&ss=17&sr=-2.75,.53',
+    'Class 1': 'https://my.matterport.com/show/?m=bm8vfcUGTKv&cloudEdit=1&play=1&qs=1&ss=15&sr=-.47,-.56',
+    'Class 4': 'https://my.matterport.com/show/?m=bm8vfcUGTKv&cloudEdit=1&play=1&qs=1&ss=38&sr=-2.05,1.23',
     'Toilets': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.65675632029388,21.264201892862243',
     'Waiting Hall': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.656806414043714,21.264209283743366',
     'Anganvadi': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.656854044166508,21.264197786817174'

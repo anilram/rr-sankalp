@@ -46,7 +46,7 @@ function initializeMap() {
 
 // Load GeoJSON data and create polygon and line layers
 function loadGeoJSONLayers() {
-  axios.get('/bundle/assets/22110402107_features.geojson').then((response) => {
+  axios.get('/bundle/assets/22110402107_Features.geojson').then((response) => {
     const data = response.data;
     let polygonColorIndex = 0;
     let lineColorIndex = 0;
@@ -138,7 +138,7 @@ function addLayer(layerName, feature, color) {
 // Load GeoJSON data and create markers
 async function loadGeoJSONMarkers() {
   try {
-    const response = await axios.get('/bundle/assets/22110402107_spaces.geojson');
+    const response = await axios.get('/bundle/assets/22110402107_Spaces.geojson');
     geojsonData = response.data;
 
     // Call the function to create the floor panel and return it
@@ -221,17 +221,17 @@ function addPannel(geojsonData) {
 function getSubButtonsForFloor(floor) {
   const subButtons = {
     'Block 1 Floor 1': [
-      { name: 'Class 8A', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-      { name: 'Class 8B', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-      { name: 'Class 8C', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-      { name: 'HM Room', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-      { name: 'Store Room', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-      { name: 'Staff Room', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-      { name: 'Store Room', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-      { name: 'Class Room', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-      { name: 'Class 2A', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
+      { name: 'Class 8A', url: 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=16&sr=-2.7,-.05' },
+      { name: 'Class 8B', url: 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=16&sr=-2.7,-.05' },
+      { name: 'Class 8C', url: 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=6&sr=-.69,-.25' },
+      { name: 'HM Room', url: 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=46&sr=-2.34,-.21' },
+      { name: 'Store Room', url: 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=80&sr=-1.47,1.03' },
+      { name: 'Staff Room', url: 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=94&sr=-2.25,.16' },
+      { name: 'Store Room', url: 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=71&sr=-1.53,-1.02' },
+      { name: 'Class Room', url: 'https://my.matterport.com/show/?m=1M8UGKMtQUC&play=1&qs=1&ss=72&sr=-.28,-.68' },
+      { name: 'Class 2A', url: 'https://my.matterport.com/show/?m=1M8UGKMtQUC&play=1&qs=1&ss=7&sr=-.19,.35' },
       { name: '', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-      { name: 'Class 2B', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' }
+      { name: 'Class 2B', url: 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=6&sr=-.69,-.25' }
     ]
   };
   return subButtons[floor] || [];
@@ -584,16 +584,16 @@ const markerStyles = `
 // Function to get the deep link based on the area
 function getDeepLinkForArea(area) {
   const deepLinks = {
-    'Class 8A': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43',
-    'Class 8B': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43',
-    'Class 8C': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43',
-    'HM Room': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43',
-    'Store Room': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43',
-    'Staff Room': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43',
-    'Class Room': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43',
-    'Class 2A': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43',
-    'Class 2B': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43'
-  };
+    'Class 8A': 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=16&sr=-2.7,-.05',
+    'Class 8B': 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=16&sr=-2.7,-.05',
+    'Class 8C': 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=6&sr=-.69,-.25',
+    'HM Room': 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=46&sr=-2.34,-.21',
+    'Store Room': 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=80&sr=-1.47,1.03',
+    'Staff Room': 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=94&sr=-2.25,.16',
+    'Class Room': 'https://my.matterport.com/show/?m=1M8UGKMtQUC&play=1&qs=1&ss=72&sr=-.28,-.68',
+    'Class 2A': 'https://my.matterport.com/show/?m=1M8UGKMtQUC&play=1&qs=1&ss=7&sr=-.19,.35',
+    'Class 2B': 'https://my.matterport.com/show/?m=J575LvTCEMm&play=1&qs=1&ss=6&sr=-.69,-.25'
+};
   return deepLinks[area] || '';
 }
 // Initialize Matterport SDK for 3D view

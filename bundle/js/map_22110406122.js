@@ -224,12 +224,12 @@ function addPannel(geojsonData) {
 function getSubButtonsForFloor(floor) {
     const subButtons = {
         'Block 1 Floor 1': [
-          { name: 'Office', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-          { name: 'Staff Room', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-          { name: 'Kitchen', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-          { name: 'Class 9B', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-          { name: 'Class 9A', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-          { name: 'Toilets', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' }
+          { name: 'Office', url: 'https://my.matterport.com/show/?m=kgpHfx7aosH&play=1&qs=1&ss=25&sr=-.69,-.42' },
+          { name: 'Staff Room', url: 'https://my.matterport.com/show/?m=wH6wb5HtboD&play=1&qs=1&ss=54&sr=-1.63,1.17' },
+          { name: 'Kitchen', url: 'https://my.matterport.com/show/?m=kgpHfx7aosH&play=1&qs=1&ss=7&sr=-1.07,-1.1' },
+          { name: 'Class 9B', url: 'https://my.matterport.com/show/?m=wH6wb5HtboD&play=1&qs=1&ss=24&sr=-.26,1.08' },
+          { name: 'Class 9A', url: 'https://my.matterport.com/show/?m=wH6wb5HtboD&play=1&qs=1&ss=35&sr=-1.28,1.25' },
+          { name: 'Toilets', url: 'https://my.matterport.com/show/?m=aHtDvvnb2kF&cloudEdit=1&play=1&qs=1&ss=2&sr=-2.27,-1.07' }
         ]
       };
   return subButtons[floor] || [];
@@ -581,14 +581,14 @@ const markerStyles = `
 
 // Function to get the deep link based on the area
 function getDeepLinkForArea(area) {
-    const deepLinks = {
-        'Office': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.637856325379033,21.291009154914544',
-        'Staff Room': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.638244894278571,21.290894560018749',
-        'Kitchen': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.638293630038859,21.290858996085571',
-        'Class 9B': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.638406907751943,21.290807625959872',
-        'Class 9A': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.63846222942577,21.290772062026694',
-        'Toilets': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=81.638512282368765,21.290681176419682'
-      };
+  const deepLinks = {
+    'Office': 'https://my.matterport.com/show/?m=kgpHfx7aosH&play=1&qs=1&ss=25&sr=-.69,-.42',
+    'Staff Room': 'https://my.matterport.com/show/?m=wH6wb5HtboD&play=1&qs=1&ss=54&sr=-1.63,1.17',
+    'Kitchen': 'https://my.matterport.com/show/?m=kgpHfx7aosH&play=1&qs=1&ss=7&sr=-1.07,-1.1',
+    'Class 9B': 'https://my.matterport.com/show/?m=wH6wb5HtboD&play=1&qs=1&ss=24&sr=-.26,1.08',
+    'Class 9A': 'https://my.matterport.com/show/?m=wH6wb5HtboD&play=1&qs=1&ss=35&sr=-1.28,1.25',
+    'Toilets': 'https://my.matterport.com/show/?m=aHtDvvnb2kF&cloudEdit=1&play=1&qs=1&ss=2&sr=-2.27,-1.07'
+};
   return deepLinks[area] || '';
 }
 // Initialize Matterport SDK for 3D view
