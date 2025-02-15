@@ -224,16 +224,16 @@ function addPannel(geojsonData) {
 function getSubButtonsForFloor(floor) {
     const subButtons = {
       'Block1 Ground': [
-        { name: 'Office', url: 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&ss=25&sr=-.49,.95' },
-        { name: 'Class 5A', url: '3eb46242aad791aefa762d89a01f631aa5c09f1c73c3bae55df33bcaaa769c33caeea5adbc48' },
-        { name: 'Class 1A', url: 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&ss=14&sr=3.11,-1.15' },
-        { name: 'HM Room', url: '3eb46242aad791aefa762d89a01f631aa5c09f1c73c3bae55df33bcaaa769c33caeea5adbc48' },
-        { name: 'Toilets', url: 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&ss=18&sr=-1.45,1.35'}
+        { name: 'Office', url: 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&play=1&qs=1&ss=25&sr=-.49,.95' },
+        { name: 'Class 5A', url: 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&play=1&qs=1&ss=3&sr=-1.8,-1.36' },
+        { name: 'Class 1A', url: 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&play=1&qs=1&ss=14&sr=3.11,-1.15' },
+        { name: 'HM Room', url: 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&play=1&qs=1&ss=7&sr=-2.91,1.11' },
+        { name: 'Toilets', url: 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&play=1&qs=1&ss=18&sr=-1.45,1.35'}
       ],
       'Block2 Ground': [
         
-        { name: 'Class Room 1', url: 'https://my.matterport.com/show/?m=MCHGhtpKu2H&cloudEdit=1&ss=24&sr=,1' },
-        { name: 'Class Room 2', url: 'https://my.matterport.com/show/?m=MCHGhtpKu2H&cloudEdit=1&ss=17&sr=-2.9,.8' }
+        { name: 'Class Room 1', url: 'https://my.matterport.com/show/?m=MCHGhtpKu2H&cloudEdit=1&play=1&qs=1&ss=24&sr=1' },
+        { name: 'Class Room 2', url: 'https://my.matterport.com/show/?m=MCHGhtpKu2H&cloudEdit=1&play=1&qs=1&ss=17&sr=-2.9,.8' }
       ]
     };
     return subButtons[floor] || [];
@@ -587,14 +587,14 @@ const markerStyles = `
 // Function to get the deep link based on the area
 function getDeepLinkForArea(area) {
     const deepLinks = {
-     'Office':'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&ss=25&sr=-.49,.95',
-      'Class 5A': '3eb46242aad791aefa762d89a01f631aa5c09f1c73c3bae55df33bcaaa769c33caeea5adbc48',
-      'Class 1A': 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&ss=14&sr=3.11,-1.15',
-      'HM Room' : '3eb46242aad791aefa762d89a01f631aa5c09f1c73c3bae55df33bcaaa769c33caeea5adbc48',
-      'Toilets': 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&ss=18&sr=-1.45,1.35',
+     'Office':'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&play=1&qs=1&ss=25&sr=-.49,.95',
+      'Class 5A': 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&play=1&qs=1&ss=3&sr=-1.8,-1.36',
+      'Class 1A': 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&play=1&qs=1&ss=14&sr=3.11,-1.15',
+      'HM Room' : 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&play=1&qs=1&ss=7&sr=-2.91,1.11',
+      'Toilets': 'https://my.matterport.com/show/?m=YLH6dFWsLfQ&cloudEdit=1&play=1&qs=1&ss=18&sr=-1.45,1.35',
      
-      'Class Room 1': 'https://my.matterport.com/show/?m=MCHGhtpKu2H&cloudEdit=1&ss=24&sr=,1',
-      'Class Room 2': 'https://my.matterport.com/show/?m=MCHGhtpKu2H&cloudEdit=1&ss=17&sr=-2.9,.8'
+      'Class Room 1': 'https://my.matterport.com/show/?m=MCHGhtpKu2H&cloudEdit=1&play=1&qs=1&ss=24&sr=,1',
+      'Class Room 2': 'https://my.matterport.com/show/?m=MCHGhtpKu2H&cloudEdit=1&play=1&qs=1&ss=17&sr=-2.9,.8'
    
     };
     return deepLinks[area] || '';

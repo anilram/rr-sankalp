@@ -583,8 +583,8 @@ const markerStyles = `
 function getDeepLinkForArea(area) {
   const deepLinks = {
     'Office': 'https://my.matterport.com/show/?m=kgpHfx7aosH&play=1&qs=1&ss=25&sr=-.69,-.42',
-    'Staff Room': 'https://my.matterport.com/show/?m=wH6wb5HtboD&play=1&qs=1&ss=54&sr=-1.63,1.17',
-    'Kitchen': 'https://my.matterport.com/show/?m=kgpHfx7aosH&play=1&qs=1&ss=7&sr=-1.07,-1.1',
+    'Staff Room': 'https://my.matterport.com/show/?m=kgpHfx7aosH&play=1&qs=1&ss=7&sr=-1.07,-1.1',
+    'Kitchen': 'https://my.matterport.com/show/?m=wH6wb5HtboD&play=1&qs=1&ss=54&sr=-1.63,1.17',
     'Class 9B': 'https://my.matterport.com/show/?m=wH6wb5HtboD&play=1&qs=1&ss=24&sr=-.26,1.08',
     'Class 9A': 'https://my.matterport.com/show/?m=wH6wb5HtboD&play=1&qs=1&ss=35&sr=-1.28,1.25',
     'Toilets': 'https://my.matterport.com/show/?m=aHtDvvnb2kF&cloudEdit=1&play=1&qs=1&ss=2&sr=-2.27,-1.07'

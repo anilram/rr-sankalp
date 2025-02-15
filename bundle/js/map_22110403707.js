@@ -223,7 +223,7 @@ function getSubButtonsForFloor(floor) {
     'Block2 Floor1': [
       { name: 'Toilets', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
       { name: 'Store Room', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
-      { name: 'Corridor', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
+      { name: 'Corridor', url: 'https://my.matterport.com/show/?m=Rmw959QZDiq&cloudEdit=1&ss=63&sr=-2.13,-.51&play=1&qs=1' },
       { name: 'Class Room', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
       { name: 'Class 1', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
       { name: 'HM Room', url: 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43' },
@@ -592,14 +592,24 @@ const markerStyles = `
 // Function to get the deep link based on the area
 function getDeepLinkForArea(area) {
   const deepLinks = {
-    'Boys Toilets': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43',
-    'Girls Toilets': 'https://my.matterport.com/show/?m=p2zBEUYzuFn&cloudEdit=1&play=1&qs=1&ss=2&sr=-1.91,-1.43',
-    'Staff Room': 'https://my.matterport.com/show/?m=KKhZbDVzoJH&cloudEdit=1&play=1&qs=1&ss=3&sr=-3.14',
-    'Class 5A': 'https://my.matterport.com/show/?m=92fPfxkdDWu&cloudEdit=1&play=1&qs=1&ss=4&sr=-2.42,-1.175',
-    'Class 1A': 'https://my.matterport.com/show/?m=92fPfxkdDWu&cloudEdit=1&play=1&qs=1&ss=4&sr=-2.42,-1.175',
-    'Class 3A': 'https://my.matterport.com/show/?m=KKhZbDVzoJH&cloudEdit=1&play=1&qs=1&ss=3&sr=-3.14',
-    'Class 4A': 'https://my.matterport.com/show/?m=KKhZbDVzoJH&cloudEdit=1&play=1&qs=1&ss=3&sr=-3.14'
-  };
+    'Toilets': 'https://my.matterport.com/show/?m=xJxUejAzivA&cloudEdit=1&ss=41&sr=-1.83,-.76&play=1&qs=1',
+    'Toilets 2': 'https://my.matterport.com/show/?m=Rmw959QZDiq&cloudEdit=1&ss=63&sr=-2.13,-.51&play=1&qs=1',
+    'Toilets 3': 'https://my.matterport.com/show/?m=Rmw959QZDiq&cloudEdit=1&ss=63&sr=-2.13,-.51&play=1&qs=1',
+    'Store Room': 'https://my.matterport.com/show/?m=Rmw959QZDiq&cloudEdit=1&ss=63&sr=-2.13,-.51&play=1&qs=1',
+    'Corridor': 'https://my.matterport.com/show/?m=Rmw959QZDiq&cloudEdit=1&ss=63&sr=-2.13,-.51&play=1&qs=1',
+    'Class Room': 'https://my.matterport.com/show/?m=xJxUejAzivA&cloudEdit=1&ss=4&sr=.01,-.37&play=1&qs=1',
+    'Class 1': 'https://my.matterport.com/show/?m=xJxUejAzivA&cloudEdit=1&ss=19&sr=-2.24,1.07&play=1&qs=1',
+    'HM Room': 'https://my.matterport.com/show/?m=Rmw959QZDiq&cloudEdit=1&ss=30&sr=-.22,.91&play=1&qs=1',
+    'Staff Room': 'https://my.matterport.com/show/?m=Rmw959QZDiq&cloudEdit=1&ss=47&sr=-3.08,.81&play=1&qs=1',
+    'Store Room 2': 'https://my.matterport.com/show/?m=xJxUejAzivA&cloudEdit=1&ss=64&sr=-1.11,.24&play=1&qs=1',
+    'Store Room 3': 'https://my.matterport.com/show/?m=hipGsc2kPKD&cloudEdit=1&ss=15&sr=-1.19,1.23&play=1&qs=1',
+    'Store Room 1': 'https://my.matterport.com/show/?m=hipGsc2kPKD&cloudEdit=1&ss=22&sr=-.45,.47&play=1&qs=1',
+    'Class 5': 'https://my.matterport.com/show/?m=92fPfxkdDWu&cloudEdit=1&play=1&qs=1&ss=4&sr=-2.42,-1.175',
+    'Class 4': 'https://my.matterport.com/show/?m=92fPfxkdDWu&cloudEdit=1&play=1&qs=1&ss=4&sr=-2.42,-1.175',
+    'Class 3': 'https://my.matterport.com/show/?m=92fPfxkdDWu&cloudEdit=1&play=1&qs=1&ss=4&sr=-2.42,-1.175',
+    'Storage Room': 'https://my.matterport.com/show/?m=92fPfxkdDWu&cloudEdit=1&play=1&qs=1&ss=4&sr=-2.42,-1.175',
+    'Library': 'https://my.matterport.com/show/?m=Rmw959QZDiq&cloudEdit=1&ss=51&sr=-2.72,.8&play=1&qs=1'
+};
   return deepLinks[area] || '';
 }
 // Initialize Matterport SDK for 3D view
