@@ -46,7 +46,7 @@ function initializeMap() {
 
 // Load GeoJSON data and create polygon and line layers
 function loadGeoJSONLayers() {
-  axios.get('/bundle/assets/22110403707_Features.geojson').then((response) => {
+  axios.get('/bundle/assets/22110403707_features.geojson').then((response) => {
     const data = response.data;
     let polygonColorIndex = 0;
     let lineColorIndex = 0;
@@ -138,7 +138,7 @@ function addLayer(layerName, feature, color) {
 // Load GeoJSON data and create markers
 async function loadGeoJSONMarkers() {
   try {
-    const response = await axios.get('/bundle/assets/22110403707_Spaces.geojson');
+    const response = await axios.get('/bundle/assets/22110403707_spaces.geojson');
     geojsonData = response.data;
 
     // Call the function to create the floor panel and return it
