@@ -6,7 +6,7 @@ const mapContainer = document.getElementById('map-container');
 const layerContainer = document.getElementById('layer-container');
 const walkthroughContainer = document.getElementById('walkthrough-container');
 
-const orthoCenter = [81.595255, 21.248974];
+const orthoCenter = [81.6042613296, 21.2284878688];
 const orthoZoom = 18.75;
 
 const polygonColors = ['#FF6347', '#4682B4', '#32CD32', '#FFD700', '#8A2BE2'];
@@ -28,19 +28,22 @@ function initializeMap() {
   });
 
   map.on('load', () => {
-    map.addSource('local-tiles', {
-        type: 'raster',
-        tiles: ['http://localhost:8080/data/22110400102/{z}/{x}/{y}.png'],
-        tileSize: 256
+    // Add raster tileset layer
+    map.addSource('orthoTileset', {
+      type: 'raster',
+      url: 'mapbox://rayapati49.7dx6jtp9',
+    });
+    map.addLayer({
+      id: 'orthoTilesetLayer',
+      source: 'orthoTileset',
+      type: 'raster',
+      layout: { visibility: 'visible' },
     });
 
-    map.addLayer({
-        id: 'local-layer',
-        type: 'raster',
-        source: 'local-tiles'
-    });
     // Load and add GeoJSON layers
     loadGeoJSONLayers();
+
+    
   });
 }
 
@@ -54,7 +57,6 @@ function loadGeoJSONLayers() {
     data.features.map((feature, index) => {
       const layerName = feature.properties.layer || `Layer ${index + 1}`;
       let color;
-
         color = polygonColors[polygonColorIndex % polygonColors.length];
         color = lineColors[lineColorIndex % lineColors.length];    
         addLayer(layerName, feature, color);

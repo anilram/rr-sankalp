@@ -18,6 +18,7 @@ let polygonVisibility = {};
 let selectedLocation = null;
 
 // Initialize Mapbox map
+
 function initializeMap() {
   map = new mapboxgl.Map({
     container: mapContainer,
@@ -28,19 +29,22 @@ function initializeMap() {
   });
 
   map.on('load', () => {
-    map.addSource('local-tiles', {
-        type: 'raster',
-        tiles: ['http://localhost:8080/data/22110403707/{z}/{x}/{y}.png'],
-        tileSize: 256
+    // Add raster tileset layer
+    map.addSource('orthoTileset', {
+      type: 'raster',
+      url: 'mapbox://rayapati49.beg6owri',
+    });
+    map.addLayer({
+      id: 'orthoTilesetLayer',
+      source: 'orthoTileset',
+      type: 'raster',
+      layout: { visibility: 'visible' },
     });
 
-    map.addLayer({
-        id: 'local-layer',
-        type: 'raster',
-        source: 'local-tiles'
-    });
     // Load and add GeoJSON layers
     loadGeoJSONLayers();
+
+    
   });
 }
 
