@@ -477,6 +477,7 @@
                 // Toggle map visibility
                 mapToggleBtn.addEventListener('click', () => {
                     mapContainer2.classList.toggle('hidden');
+                    $('.sidebar-toggle').click();
                     mapToggleBtn.textContent = mapContainer2.classList.contains('hidden') ? 'Schools' : 'X';
                     sidebarToggleBtn.style.display = mapContainer2.classList.contains('hidden') ? 'block' : 'none';
                     topRightControls.classList.toggle('shifted'); // Shift the controls to the right
