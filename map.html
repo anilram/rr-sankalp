@@ -16,16 +16,98 @@
             margin: 0px ;
             font-size: 15px; /* Set the font size */
         }
+        .top-right-controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            z-index: 1000; /* Ensure it stays on top */
+            transition: right 0.4s ease; /* Smooth transition for right position */
+        }
+
+        #search-bar {
+            margin-right: 10px;
+            padding: 8px 12px;
+            font-size: 14px;
+            background-color: #fff; /* White background */
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 4px; /* Rounded corners */
+            color: #000; /* Black text color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            transition: margin-right 0.4s ease; /* Smooth transition for margin-right */
+        }
+
+        .search-button {
+            margin-right: 90px;
+            padding: 8px 12px;
+            font-size: 14px;
+            background-color: #007bff; /* Blue background */
+            border: none; /* Remove border */
+            border-radius: 4px; /* Rounded corners */
+            color: #fff; /* White text color */
+            cursor: pointer; /* Pointer cursor on hover */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            transition: margin-right 0.4s ease; /* Smooth transition for margin-right */
+        }
+
+        .search-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        .map-toggle {
+            padding: 8px 12px;
+            font-size: 14px;
+            background-color: #28a745; /* Green background */
+            border: none; /* Remove border */
+            border-radius: 4px; /* Rounded corners */
+            color: #fff; /* White text color */
+            cursor: pointer; /* Pointer cursor on hover */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        .map-toggle:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .map-container, .map-viewer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: opacity 0.4s ease; /* Smooth transition for opacity */
+        }
+
+        .main-container {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Full viewport height */
+        }
+
+        .hidden {
+            opacity: 0; /* Hide element with opacity */
+        }
+
+        .shifted {
+            right: 50px; /* Shift the controls to the right */
+        }
     </style>
 </head>
 <body>
-    <button class="sidebar-toggle">
+    <button class="sidebar-toggle" id="sidebar-toggle">
         <i class="fas fa-bars"></i>
     </button>
 
-    <button id="map-toggle" class="map-toggle">
-        X
-    </button>
+    <div class="top-right-controls">
+        <input type="text" id="search-bar" placeholder="Search by UDISE code">
+        <button id="search-button" class="search-button">
+            Search
+        </button>
+        <button id="map-toggle" class="map-toggle">
+            Schools
+        </button>
+    </div>
 
     <div class="main-container">
         <!-- Sidebar -->
@@ -54,7 +136,6 @@
             <div id="map-container-2" class="map-viewer"></div> <!-- Second map container -->
         </div>
     </div>
-
 
     <!-- Scripts -->
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
@@ -322,84 +403,136 @@
     <script>
         let geojson = null;
 
-// Fetch the GeoJSON data from the external file (replace with the correct path)
-fetch('/bundle/assets/schools-list.geojson')
-    .then(response => response.json())  // Parse the JSON data
-    .then(geojsondata => {
-        // Store the fetched GeoJSON data in the geojson variable
-        geojson = geojsondata;
-        mapboxgl.accessToken = 'pk.eyJ1IjoicmF5YXBhdGk0OSIsImEiOiJjbGVvMWp6OGIwajFpM3luNTBqZHhweXZzIn0.1r2DoIQ1Gf2K3e5WBgDNjA';
+        // Fetch the GeoJSON data from the external file (replace with the correct path)
+        fetch('/bundle/assets/schools-list.geojson')
+            .then(response => response.json())  // Parse the JSON data
+            .then(geojsondata => {
+                // Store the fetched GeoJSON data in the geojson variable
+                geojson = geojsondata;
+                mapboxgl.accessToken = 'pk.eyJ1IjoicmF5YXBhdGk0OSIsImEiOiJjbGVvMWp6OGIwajFpM3luNTBqZHhweXZzIn0.1r2DoIQ1Gf2K3e5WBgDNjA';
 
-        const mapContainer2 = document.getElementById('map-container-2');
-        const sectionTitle = document.querySelector('.section-title'); // Select the section title
+                const mapContainer2 = document.getElementById('map-container-2');
+                const sectionTitle = document.querySelector('.section-title'); // Select the section title
 
-        // Initialize the map
-        const map2 = new mapboxgl.Map({
-            container: mapContainer2, // ID of the map container
-            style: 'mapbox://styles/mapbox/streets-v11', // Map style
-            center: [78.4867, 18.0750], // Initial coordinates [lng, lat]
-            zoom: 6, // Initial zoom level
-            attributionControl: false
-        });
+                // Initialize the map
+                const map2 = new mapboxgl.Map({
+                    container: mapContainer2, // ID of the map container
+                    style: 'mapbox://styles/mapbox/streets-v11', // Map style
+                    center: [78.4867, 18.0750], // Initial coordinates [lng, lat]
+                    zoom: 6, // Initial zoom level
+                    attributionControl: false
+                });
 
-        // Array to store the bounds for all markers
-        const bounds = new mapboxgl.LngLatBounds();
+                // Array to store the bounds for all markers
+                const bounds = new mapboxgl.LngLatBounds();
 
-        // Add markers with hover popups
-        geojson.features.forEach((feature) => {
-            const { geometry, properties } = feature;
-            const [lng, lat] = geometry.coordinates;
+                // Add markers with hover popups
+                geojson.features.forEach((feature) => {
+                    const { geometry, properties } = feature;
+                    const [lng, lat] = geometry.coordinates;
 
-            // Add a marker
-            const marker = new mapboxgl.Marker()
-                .setLngLat([lng, lat]) // Set marker position
-                .addTo(map2);
+                    // Add a marker
+                    const marker = new mapboxgl.Marker()
+                        .setLngLat([lng, lat]) // Set marker position
+                        .addTo(map2);
 
-            // Create the popup without the close button
-            const popup = new mapboxgl.Popup({ offset: 25, closeButton: false })
-                .setHTML(`<p>UDISE: ${properties.UDISE}</p>`);
+                    // Add data attribute for UDISE code
+                    marker.getElement().setAttribute('data-udise', properties.UDISE);
 
-            popup.setLngLat([lng, lat]).addTo(map2);
+                    // Create the popup without the close button
+                    const popup = new mapboxgl.Popup({ offset: 25, closeButton: false })
+                        .setHTML(`<p>UDISE: ${properties.UDISE}</p>`)
+                        .setLngLat([lng, lat])
+                        .addTo(map2);
 
-            const markerElement = marker.getElement();
-            markerElement.addEventListener('click', () => {
-                window.location.href = `/map.html?UDISE=${encodeURIComponent(properties.UDISE)}`;
+                    // Add data attribute to popup
+                    popup.getElement().setAttribute('data-udise', properties.UDISE);
+
+                    const markerElement = marker.getElement();
+                    markerElement.addEventListener('click', () => {
+                        window.location.href = `/map.html?UDISE=${encodeURIComponent(properties.UDISE)}`;
+                    });
+
+                    // Extend the bounds to include the marker's coordinates
+                    bounds.extend([lng, lat]);
+                });
+
+                // Fit the map to the bounds of all markers
+                map2.fitBounds(bounds, {
+                    padding: { top: 50, bottom: 50, left: 50, right: 50 }, // Padding around the markers
+                    maxZoom: 12, // Limit the maximum zoom level
+                    duration: 1000 // Smooth animation for zooming and centering
+                });
+
+                // Function to close the map initially
+                function closeMap() {
+                    mapContainer2.classList.add('hidden'); // Add the 'hidden' class to hide the map
+                    mapToggleBtn.textContent = 'Schools'; // Set the initial button text
+                    topRightControls.classList.remove('shifted'); // Reset the position of controls
+                    console.log("Map is hidden");
+                }
+
+                // Initialize DOM elements
+                const mapToggleBtn = document.getElementById('map-toggle');
+                const sidebarToggleBtn = document.getElementById('sidebar-toggle');
+                const topRightControls = document.querySelector('.top-right-controls');
+
+                // Toggle map visibility
+                mapToggleBtn.addEventListener('click', () => {
+                    mapContainer2.classList.toggle('hidden');
+                    mapToggleBtn.textContent = mapContainer2.classList.contains('hidden') ? 'Schools' : 'X';
+                    sidebarToggleBtn.style.display = mapContainer2.classList.contains('hidden') ? 'block' : 'none';
+                    topRightControls.classList.toggle('shifted'); // Shift the controls to the right
+                });
+
+                // Call closeMap() initially
+                closeMap();
+
+                // Search bar functionality
+                const searchBar = document.getElementById('search-bar');
+                const searchButton = document.getElementById('search-button');
+
+                function filterSchools() {
+                    const query = searchBar.value.toLowerCase();
+                    geojson.features.forEach((feature) => {
+                        const { properties } = feature;
+                        const markerElement = document.querySelector(`[data-udise="${properties.UDISE}"]`);
+                        const popupElement = document.querySelector(`.mapboxgl-popup[data-udise="${properties.UDISE}"]`);
+                        if (properties.UDISE.toLowerCase().includes(query)) {
+                            markerElement.style.display = 'block';
+                            if (popupElement) {
+                                popupElement.style.display = 'block';
+                            }
+                        } else {
+                            markerElement.style.display = 'none';
+                            if (popupElement) {
+                                popupElement.style.display = 'none';
+                            }
+                        }
+                    });
+                }
+
+                function redirectToSchool() {
+                    const query = searchBar.value.toLowerCase();
+                    const matchedSchool = geojson.features.find((feature) => feature.properties.UDISE.toLowerCase() === query);
+                    if (matchedSchool) {
+                        window.location.href = `/map.html?UDISE=${encodeURIComponent(matchedSchool.properties.UDISE)}`;
+                    } else {
+                        alert('No matching school found');
+                    }
+                }
+
+                searchBar.addEventListener('input', filterSchools);
+                searchButton.addEventListener('click', redirectToSchool);
+                searchBar.addEventListener('keypress', (event) => {
+                    if (event.key === 'Enter') {
+                        redirectToSchool();
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error loading the GeoJSON file:', error);
             });
-
-            // Extend the bounds to include the marker's coordinates
-            bounds.extend([lng, lat]);
-        });
-
-        // Fit the map to the bounds of all markers
-        map2.fitBounds(bounds, {
-            padding: { top: 50, bottom: 50, left: 50, right: 50 }, // Padding around the markers
-            maxZoom: 12, // Limit the maximum zoom level
-            duration: 1000 // Smooth animation for zooming and centering
-        });
-
-        // Function to close the map initially
-        function closeMap() {
-            mapContainer2.classList.add('hidden'); // Add the 'hidden' class to hide the map
-            mapToggleBtn.textContent = 'Schools'; // Set the initial button text
-            console.log("Map is hidden");
-        }
-
-        // Initialize DOM elements
-        const mapToggleBtn = document.getElementById('map-toggle');
-
-        // Toggle map visibility
-        mapToggleBtn.addEventListener('click', () => {
-            mapContainer2.classList.toggle('hidden');
-            mapToggleBtn.textContent = mapContainer2.classList.contains('hidden') ? 'Schools' : 'X';
-        });
-
-        // Call closeMap() initially
-        closeMap();
-    })
-    .catch(error => {
-        console.error('Error loading the GeoJSON file:', error);
-    });
-
     </script>
 </body>
 </html>
